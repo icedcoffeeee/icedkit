@@ -1,24 +1,23 @@
 import { db } from './db';
-import { sessions, users } from './schema';
+import * as schema from './schema';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private';
 
-import { Lucia } from 'lucia';
-import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
-import { dev } from '$app/environment';
+import { betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
-import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private';
-import { createClient } from '@supabase/supabase-js';
-
-const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
-export const lucia = new Lucia(adapter, {
-	sessionCookie: { attributes: { secure: !dev } }
-});
-
-declare module 'lucia' {
-	interface Register {
-		Lucia: typeof lucia;
-		UserId: number;
-		DatabaseUserAttributes: { email: string };
+export const auth = betterAuth({
+	database: drizzleAdapter(db, {
+		provider: 'pg',
+		schema: {
+			user: schema.users,
+			account: schema.accounts,
+			verification: schema.verifications
+		}
+	}),
+	socialProviders: {
+		github: {
+			clientId: GITHUB_CLIENT_ID,
+			clientSecret: GITHUB_CLIENT_SECRET
+		}
 	}
-}
-
-export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+});

@@ -1,6 +1,8 @@
-import { redirect, type ServerLoadEvent } from '@sveltejs/kit';
+import { auth } from '$lib/auth';
+import { type ServerLoadEvent } from '@sveltejs/kit';
 
-export async function load({ locals: { user } }: ServerLoadEvent) {
-	if (!user) redirect(302, '/login');
-	return { user };
+export async function load({ request: { headers } }: ServerLoadEvent) {
+	const data = await auth.api.getSession({ headers });
+	if (data && data.session) return { user: data.user };
+	return {};
 }
