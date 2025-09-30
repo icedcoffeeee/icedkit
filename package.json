@@ -6,7 +6,8 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"migrate": "drizzle-kit generate && drizzle-kit migrate"
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"db:migrate": "drizzle-kit generate && drizzle-kit migrate"
 	},
 	"dependencies": {
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
