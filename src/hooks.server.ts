@@ -9,9 +9,11 @@ const better_auth: Handle = async ({ event, resolve }) => {
 };
 
 const locals_handler: Handle = async ({ event, resolve }) => {
-  const { session, user } = await auth.api.getSession({ headers: event.request.headers });
-  event.locals.session = session;
-  event.locals.user = user;
+  const data = await auth.api.getSession({ headers: event.request.headers });
+  if (data) {
+    event.locals.session = data.session;
+    event.locals.user = data.user;
+  }
 
   return resolve(event);
 };
