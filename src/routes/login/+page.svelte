@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { signIn, signUp } from '$/auth-client';
+  import { signIn, signUp } from "$/auth-client";
 
   let creds = {
-    email: '',
-    password: '',
-    errors: '',
+    email: "",
+    password: "",
+    errors: "",
   };
 </script>
 
@@ -34,7 +34,7 @@
     <button
       class="bg-black text-white"
       onclick={async () => {
-        let data = await signUp.email({ name: '', ...creds });
+        let data = await signUp.email({ name: "", ...creds });
         if (data.error) creds.errors = data.error.message!;
       }}
     >

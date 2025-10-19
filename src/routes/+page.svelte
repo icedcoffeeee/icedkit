@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { signOut } from '$/auth-client';
-  import type { PageData } from './$types';
+  import { signOut } from "$/auth-client";
+  import type { PageData } from "./$types";
 
   interface Props {
     data: PageData;

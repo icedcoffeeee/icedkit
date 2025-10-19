@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Session, User } from 'better-auth';
+import type { Session, User } from "better-auth";
 
 // for information about these interfaces
 declare global {

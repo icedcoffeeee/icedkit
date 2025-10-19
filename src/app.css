@@ -1,4 +1,17 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@theme inline {
+  --color-foreground: var(--color-white);
+  --color-background: var(--color-black);
+  --color-primary: var(--color-blue-800);
+
+  --font-sans: "Karla", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
 
 .debug {
   @apply border border-red-500;
