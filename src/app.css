@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.debug {
+  @apply border border-red-500;
+}
+
 @theme inline {
   --color-foreground: var(--color-white);
   --color-background: var(--color-black);
@@ -13,6 +17,14 @@ body {
   @apply bg-background text-foreground;
 }
 
-.debug {
-  @apply border border-red-500;
+h1 {
+  @apply text-lg md:text-3xl;
+}
+
+h2 {
+  @apply md:text-lg;
+}
+
+.fullscreen {
+  @apply min-h-[calc(100lvh-120px)] w-full;
 }
